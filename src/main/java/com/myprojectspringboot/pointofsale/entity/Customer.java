@@ -31,4 +31,14 @@ public class Customer {
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(name="contact_numbers",length = 255,columnDefinition = "json")
     private ArrayList contactNumber;
+
+    @Column(name="customer_salary")
+    private int customerSalary;
+
+    @Column(name="customer_nic",length = 255)
+    private String nic;
+
+
+    @Column(name="customer_status",columnDefinition = "TINYINT default 1")
+    private boolean active;
 }
