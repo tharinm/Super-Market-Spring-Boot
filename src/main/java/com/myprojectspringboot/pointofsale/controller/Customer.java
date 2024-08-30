@@ -1,5 +1,6 @@
 package com.myprojectspringboot.pointofsale.controller;
 
+import com.myprojectspringboot.pointofsale.dto.CustomerDTO;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -24,8 +25,8 @@ public class Customer {
     }
 
     @PostMapping("/save")
-    public String saveCustomer() {
-        String save="Customer Saved";
+    public String saveCustomer(@RequestBody CustomerDTO customerDTO) {
+        String save=customerDTO.getCustomerName();
         System.out.println(" "+save);
         return save;
     }
