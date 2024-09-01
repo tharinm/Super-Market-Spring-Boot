@@ -34,7 +34,7 @@ public class Customer {
         String save=customerDTO.getCustomerName();
         System.out.println(" "+save);
         customerService.saveCustomer(customerDTO);
-        return save;
+        return "saved";
     }
 
 }

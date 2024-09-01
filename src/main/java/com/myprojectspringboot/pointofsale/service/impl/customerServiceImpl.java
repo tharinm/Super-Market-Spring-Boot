@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 public class customerServiceImpl implements CustomerService {
     @Override
     public String saveCustomer(CustomerDTO customerDTO) {
+        System.out.println("address " +customerDTO.getCustomerAddress());
         return "";
     }
 }
