@@ -1,6 +1,8 @@
 package com.myprojectspringboot.pointofsale.controller;
 
 import com.myprojectspringboot.pointofsale.dto.CustomerDTO;
+import com.myprojectspringboot.pointofsale.service.CustomerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -9,6 +11,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/customer")
 public class Customer {
 
+    //depenenci enject
+    @Autowired
+    private CustomerService customerService;
 
     @GetMapping("/get-text-1")
     public String getMyTest(){
@@ -28,6 +33,7 @@ public class Customer {
     public String saveCustomer(@RequestBody CustomerDTO customerDTO) {
         String save=customerDTO.getCustomerName();
         System.out.println(" "+save);
+
         return save;
     }
 
