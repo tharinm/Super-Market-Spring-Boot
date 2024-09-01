@@ -33,7 +33,7 @@ public class Customer {
     public String saveCustomer(@RequestBody CustomerDTO customerDTO) {
         String save=customerDTO.getCustomerName();
         System.out.println(" "+save);
-
+        customerService.saveCustomer(customerDTO);
         return save;
     }
 
