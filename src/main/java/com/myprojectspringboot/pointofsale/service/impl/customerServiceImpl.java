@@ -1,6 +1,7 @@
 package com.myprojectspringboot.pointofsale.service.impl;
 
 import com.myprojectspringboot.pointofsale.dto.CustomerDTO;
+import com.myprojectspringboot.pointofsale.dto.request.CustomerUpdateDTO;
 import com.myprojectspringboot.pointofsale.entity.Customer;
 import com.myprojectspringboot.pointofsale.repo.CustomerRepo;
 import com.myprojectspringboot.pointofsale.service.CustomerService;
@@ -34,5 +35,15 @@ public class customerServiceImpl implements CustomerService {
         customerRepo.save(customer);
         System.out.println("address " +customerDTO.getCustomerAddress());
         return "";
+    }
+
+    @Override
+    public String  updateCustomer(CustomerUpdateDTO customerUpdateDTO) {
+            if(customerRepo.existsById(customerUpdateDTO.getCustomerId())){
+
+            }
+            else{
+                    throw new RuntimeException("no data");
+            }
     }
 }

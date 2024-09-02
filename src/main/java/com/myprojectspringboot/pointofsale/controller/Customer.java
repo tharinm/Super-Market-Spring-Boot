@@ -1,6 +1,7 @@
 package com.myprojectspringboot.pointofsale.controller;
 
 import com.myprojectspringboot.pointofsale.dto.CustomerDTO;
+import com.myprojectspringboot.pointofsale.dto.request.CustomerUpdateDTO;
 import com.myprojectspringboot.pointofsale.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,10 +32,18 @@ public class Customer {
 
     @PostMapping("/save")
     public String saveCustomer(@RequestBody CustomerDTO customerDTO) {
-        String save=customerDTO.getCustomerName();
-        System.out.println(" "+save);
+//        String save=customerDTO.getCustomerName();
+//        System.out.println(" "+save);
         customerService.saveCustomer(customerDTO);
         return "saved";
     }
+
+    @PutMapping("/update")
+    public String updateCustomer(@RequestBody CustomerUpdateDTO    customerDTO){
+            customerService.updateCustomer(customerDTO);
+            return "updated";
+    }
+
+
 
 }
