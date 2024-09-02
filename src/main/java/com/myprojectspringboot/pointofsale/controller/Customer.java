@@ -39,9 +39,9 @@ public class Customer {
     }
 
     @PutMapping("/update")
-    public String updateCustomer(@RequestBody CustomerUpdateDTO    customerDTO){
-            customerService.updateCustomer(customerDTO);
-            return "updated";
+    public String updateCustomer(@RequestBody CustomerUpdateDTO customerDTO){
+           String message= customerService.updateCustomer(customerDTO);
+            return message;
     }
 
 

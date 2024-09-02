@@ -46,7 +46,7 @@ public class customerServiceImpl implements CustomerService {
                         customer.setCustomerSalary(customerUpdateDTO.getCustomerSalary());
 
                         customerRepo.save(customer);
-                        return customerUpdateDTO.getCustomerName() + "update success";
+                        return customerUpdateDTO.getCustomerName() + " update success";
 
             }
             else{
