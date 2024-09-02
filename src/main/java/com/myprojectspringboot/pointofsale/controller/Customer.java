@@ -44,6 +44,14 @@ public class Customer {
             return message;
     }
 
+    @GetMapping(path="/get-by-id",params = "id")
+    public CustomerDTO getCustomerById(@RequestParam(value="id") int id){
+        System.out.println( "id" +id);
+        return null;
+    }
+
+
+
 
 
 }
