@@ -53,4 +53,30 @@ public class customerServiceImpl implements CustomerService {
                     throw new RuntimeException("no data");
             }
     }
+
+    @Override
+    public CustomerDTO getCustomerById(int id) {
+       if(customerRepo.existsById(id))
+       {
+           Customer customer=customerRepo.getReferenceById(id);
+
+
+           CustomerDTO customerDTO=new CustomerDTO(
+                   customer.getCustomerId(),
+                   customer.getCustomerName(),
+                   customer.getCustomerAddress(),
+                   customer.getContactNumber(),
+                   customer.getCustomerSalary(),
+                   customer.getNic(),
+                   customer.isActive()
+           );
+           return customerDTO;
+
+       }
+       else{
+           throw new RuntimeException("no data");
+       }
+
+
+    }
 }

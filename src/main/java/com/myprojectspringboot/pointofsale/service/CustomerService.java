@@ -8,4 +8,6 @@ public interface CustomerService {
     public String saveCustomer(CustomerDTO customerDTO);
 
     String updateCustomer(CustomerUpdateDTO customerDTO);
+
+    CustomerDTO getCustomerById(int id);
 }

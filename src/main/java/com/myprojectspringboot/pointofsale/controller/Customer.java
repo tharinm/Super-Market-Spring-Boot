@@ -46,8 +46,8 @@ public class Customer {
 
     @GetMapping(path="/get-by-id",params = "id")
     public CustomerDTO getCustomerById(@RequestParam(value="id") int id){
-        System.out.println( "id" +id);
-        return null;
+     CustomerDTO customerDTO=customerService.getCustomerById(id);
+        return customerDTO;
     }
 
 
