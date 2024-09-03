@@ -6,6 +6,8 @@ import com.myprojectspringboot.pointofsale.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
 @CrossOrigin
@@ -51,6 +53,11 @@ public class Customer {
     }
 
 
+    @GetMapping("/get-all-customer")
+    public List<CustomerDTO> getAllCustomers(){
+       List <CustomerDTO> allCustomers=customerService.getAllCustomers()
+;        return  allCustomers;
+    }
 
 
 
