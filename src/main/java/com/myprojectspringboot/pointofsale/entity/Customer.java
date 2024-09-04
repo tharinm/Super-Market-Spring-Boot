@@ -1,10 +1,7 @@
 package com.myprojectspringboot.pointofsale.entity;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -17,6 +14,7 @@ public class Customer {
 
     @Id //primary key
     @Column (name="customer_id",length = 45)  //column name
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int customerId;
 
 
