@@ -46,6 +46,7 @@ public class Customer {
             return message;
     }
 
+    //using params
     @GetMapping(path="/get-by-id",params = "id")
     public CustomerDTO getCustomerById(@RequestParam(value="id") int id){
      CustomerDTO customerDTO=customerService.getCustomerById(id);
@@ -59,6 +60,13 @@ public class Customer {
 ;        return  allCustomers;
     }
 
+
+    //pathvaribale
+    @DeleteMapping(path = "/delete-customer/{id}")
+    public String deletCustomer(@PathVariable(value="id") int customerId){
+            String delete=customerService.deleteCustomer(customerId);
+            return delete;
+    }
 
 
 }
