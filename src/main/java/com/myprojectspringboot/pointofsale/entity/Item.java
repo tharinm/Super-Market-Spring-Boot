@@ -3,9 +3,17 @@ package com.myprojectspringboot.pointofsale.entity;
 
 import com.myprojectspringboot.pointofsale.entity.enums.MeasuringUnitType;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "item")
+@NoArgsConstructor
+@Getter
+@Setter
+@ToString
 public class Item {
 
     @Id //primary key
