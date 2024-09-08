@@ -3,14 +3,12 @@ package com.myprojectspringboot.pointofsale.entity;
 
 import com.myprojectspringboot.pointofsale.entity.enums.MeasuringUnitType;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Entity
 @Table(name = "item")
 @NoArgsConstructor
+@AllArgsConstructor
 @Getter
 @Setter
 @ToString
