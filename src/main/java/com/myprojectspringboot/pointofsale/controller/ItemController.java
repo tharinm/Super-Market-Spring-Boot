@@ -1,12 +1,10 @@
 package com.myprojectspringboot.pointofsale.controller;
 
 
-import com.myprojectspringboot.pointofsale.service.CustomerService;
+import com.myprojectspringboot.pointofsale.dto.request.ItemSaveRequestDTO;
 import com.myprojectspringboot.pointofsale.service.itemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin
@@ -16,5 +14,10 @@ public class ItemController {
     @Autowired
     private itemService itemService;
 
+    @PostMapping("/save")
+    public String saveItem(@RequestBody ItemSaveRequestDTO itemSaveRequestDTO) {
 
+      String message=  itemService.saveItem(itemSaveRequestDTO);
+        return "saved";
+    }
 }

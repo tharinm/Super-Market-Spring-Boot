@@ -17,7 +17,7 @@ public class Item {
     @Id //primary key
     @Column(name="item_id",length = 45)  //column name
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int customerId;
+    private int itemId;
 
     @Column( name="item_name",length = 100,nullable = false)
     private String itemName;
@@ -39,6 +39,10 @@ public class Item {
 
     @Column(name="active_status",columnDefinition = "TINYINT default 1")
     private boolean activeState;
+
+
+    public Item(String itemName, MeasuringUnitType measuringType, double qty, double supplierPrice, double sellingPrice) {
+    }
 
 
 }
