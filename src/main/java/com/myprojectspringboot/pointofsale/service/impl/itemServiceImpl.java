@@ -1,15 +1,19 @@
 package com.myprojectspringboot.pointofsale.service.impl;
 
 import com.myprojectspringboot.pointofsale.dto.request.ItemSaveRequestDTO;
+import com.myprojectspringboot.pointofsale.dto.response.ItemGetResponse;
 import com.myprojectspringboot.pointofsale.entity.Customer;
 import com.myprojectspringboot.pointofsale.entity.Item;
 import com.myprojectspringboot.pointofsale.entity.enums.MeasuringUnitType;
 import com.myprojectspringboot.pointofsale.repo.ItemRepo;
 import com.myprojectspringboot.pointofsale.service.itemService;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.yaml.snakeyaml.constructor.DuplicateKeyException;
+
+import java.util.List;
 
 
 @Service
@@ -42,6 +46,20 @@ public class itemServiceImpl implements itemService {
         }
         else {
             throw new RuntimeException("Already Insert");
+        }
+    }
+
+    @Override
+    public List<ItemGetResponse> getItemByNameAndStatus(String name) {
+        boolean b=true;
+        List <Item> items=itemRepo.findAllByItemNameEqualsAndActiveStateEquals(name,b);
+        if(items.size()>0){
+            //special thing in modelwrapper list
+            List <ItemGetResponse> itemGetResponses=modelMapper.map(items,new TypeToken<List<ItemGetResponse>>(){}.getType());
+            return itemGetResponses;
+        }
+        else{
+            throw new RuntimeException("Item Not Active");
         }
     }
 }
