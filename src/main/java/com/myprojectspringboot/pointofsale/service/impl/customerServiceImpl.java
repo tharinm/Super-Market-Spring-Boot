@@ -5,6 +5,7 @@ import com.myprojectspringboot.pointofsale.dto.request.CustomerUpdateDTO;
 import com.myprojectspringboot.pointofsale.entity.Customer;
 import com.myprojectspringboot.pointofsale.repo.CustomerRepo;
 import com.myprojectspringboot.pointofsale.service.CustomerService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,18 +22,23 @@ public class customerServiceImpl implements CustomerService {
     @Autowired
     private CustomerRepo customerRepo;
 
+    @Autowired
+    private ModelMapper modelMapper;
+
     @Override
     public String saveCustomer(CustomerDTO customerDTO) {
         //this is  constructor only no object
-        Customer customer=new Customer(
-                customerDTO.getCustomerId(),
-                customerDTO.getCustomerName(),
-                customerDTO.getCustomerAddress(),
-                customerDTO.getContactNumber(),
-                customerDTO.getCustomerSalary(),
-                customerDTO.getNic(),
-                customerDTO.isActive()
-        );
+//        Customer customer=new Customer(
+//                customerDTO.getCustomerId(),
+//                customerDTO.getCustomerName(),
+//                customerDTO.getCustomerAddress(),
+//                customerDTO.getContactNumber(),
+//                customerDTO.getCustomerSalary(),
+//                customerDTO.getNic(),
+//                customerDTO.isActive()
+//        );
+
+        Customer customer=modelMapper.map(customerDTO,Customer.class);
 
 
         customerRepo.save(customer);
@@ -44,9 +50,12 @@ public class customerServiceImpl implements CustomerService {
     public String  updateCustomer(CustomerUpdateDTO customerUpdateDTO) {
             if(customerRepo.existsById(customerUpdateDTO.getCustomerId())){
                         Customer customer=customerRepo.getReferenceById((customerUpdateDTO.getCustomerId()));
-                        customer.setCustomerName(customerUpdateDTO.getCustomerName());
-                        customer.setCustomerAddress(customerUpdateDTO.getCustomerAddress());
-                        customer.setCustomerSalary(customerUpdateDTO.getCustomerSalary());
+
+
+//                        customer.setCustomerName(customerUpdateDTO.getCustomerName());
+//                        customer.setCustomerAddress(customerUpdateDTO.getCustomerAddress());
+//                        customer.setCustomerSalary(customerUpdateDTO.getCustomerSalary());
+                modelMapper.map(customerUpdateDTO, customer);
 
                         customerRepo.save(customer);
                         return customerUpdateDTO.getCustomerName() + " update success";
@@ -64,15 +73,17 @@ public class customerServiceImpl implements CustomerService {
            Customer customer=customerRepo.getReferenceById(id);
 
 
-           CustomerDTO customerDTO=new CustomerDTO(
-                   customer.getCustomerId(),
-                   customer.getCustomerName(),
-                   customer.getCustomerAddress(),
-                   customer.getContactNumber(),
-                   customer.getCustomerSalary(),
-                   customer.getNic(),
-                   customer.isActive()
-           );
+//           CustomerDTO customerDTO=new CustomerDTO(
+//                   customer.getCustomerId(),
+//                   customer.getCustomerName(),
+//                   customer.getCustomerAddress(),
+//                   customer.getContactNumber(),
+//                   customer.getCustomerSalary(),
+//                   customer.getNic(),
+//                   customer.isActive()
+//           );
+
+           CustomerDTO customerDTO=modelMapper.map(customer,CustomerDTO.class);
            return customerDTO;
 
        }
@@ -90,15 +101,17 @@ public class customerServiceImpl implements CustomerService {
         List <CustomerDTO> customerDTOList=new ArrayList<>();
 
       for(Customer customer:getAllCustomers){
-          CustomerDTO customerDTO=new CustomerDTO(
-                  customer.getCustomerId(),
-                  customer.getCustomerName(),
-                  customer.getCustomerAddress(),
-                  customer.getContactNumber(),
-                  customer.getCustomerSalary(),
-                  customer.getNic(),
-                  customer.isActive()
-          );
+//          CustomerDTO customerDTO=new CustomerDTO(
+//                  customer.getCustomerId(),
+//                  customer.getCustomerName(),
+//                  customer.getCustomerAddress(),
+//                  customer.getContactNumber(),
+//                  customer.getCustomerSalary(),
+//                  customer.getNic(),
+//                  customer.isActive()
+//          );
+
+          CustomerDTO customerDTO=modelMapper.map(customer,CustomerDTO.class);
           customerDTOList.add(customerDTO);
       }
         return customerDTOList;
@@ -124,15 +137,16 @@ public class customerServiceImpl implements CustomerService {
         List <CustomerDTO> customerDTOList=new ArrayList<>();
 
         for(Customer customer:getAllCustomers){
-            CustomerDTO customerDTO=new CustomerDTO(
-                    customer.getCustomerId(),
-                    customer.getCustomerName(),
-                    customer.getCustomerAddress(),
-                    customer.getContactNumber(),
-                    customer.getCustomerSalary(),
-                    customer.getNic(),
-                    customer.isActive()
-            );
+//            CustomerDTO customerDTO=new CustomerDTO(
+//                    customer.getCustomerId(),
+//                    customer.getCustomerName(),
+//                    customer.getCustomerAddress(),
+//                    customer.getContactNumber(),
+//                    customer.getCustomerSalary(),
+//                    customer.getNic(),
+//                    customer.isActive()
+//            );
+            CustomerDTO customerDTO=modelMapper.map(customer,CustomerDTO.class);
             customerDTOList.add(customerDTO);
         }
         return customerDTOList;
