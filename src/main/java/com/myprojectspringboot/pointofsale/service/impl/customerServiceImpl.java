@@ -3,6 +3,7 @@ package com.myprojectspringboot.pointofsale.service.impl;
 import com.myprojectspringboot.pointofsale.dto.CustomerDTO;
 import com.myprojectspringboot.pointofsale.dto.request.CustomerUpdateDTO;
 import com.myprojectspringboot.pointofsale.entity.Customer;
+import com.myprojectspringboot.pointofsale.exception.NotFoundException;
 import com.myprojectspringboot.pointofsale.repo.CustomerRepo;
 import com.myprojectspringboot.pointofsale.service.CustomerService;
 import org.modelmapper.ModelMapper;
@@ -125,7 +126,7 @@ public class customerServiceImpl implements CustomerService {
                 return "Deleted Successfully " +customerId;
             }
             else{
-                throw new RuntimeException("no customer to delete");
+                throw new NotFoundException("No cutomer to delete");
             }
 
     }
