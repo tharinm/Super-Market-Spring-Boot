@@ -3,7 +3,10 @@ package com.myprojectspringboot.pointofsale.controller;
 import com.myprojectspringboot.pointofsale.dto.CustomerDTO;
 import com.myprojectspringboot.pointofsale.dto.request.CustomerUpdateDTO;
 import com.myprojectspringboot.pointofsale.service.CustomerService;
+import com.myprojectspringboot.pointofsale.utills.StandardResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,11 +57,20 @@ public class Customer {
     }
 
 
+//    @GetMapping("/get-all-customer")
+//    public List<CustomerDTO> getAllCustomers(){
+//       List <CustomerDTO> allCustomers=customerService.getAllCustomers();
+//        return  allCustomers;
+//    }
+//
+
     @GetMapping("/get-all-customer")
-    public List<CustomerDTO> getAllCustomers(){
-       List <CustomerDTO> allCustomers=customerService.getAllCustomers()
-;        return  allCustomers;
+    public ResponseEntity<StandardResponse> getAllCustomers(){
+        List <CustomerDTO> allCustomers=customerService.getAllCustomers();
+        ResponseEntity<StandardResponse> response=new ResponseEntity<StandardResponse>(new StandardResponse(200,"success",allCustomers), HttpStatus.OK);
+        return  response;
     }
+
 
 
     //pathvaribale
