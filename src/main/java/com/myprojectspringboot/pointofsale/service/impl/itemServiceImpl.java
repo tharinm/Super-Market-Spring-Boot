@@ -5,6 +5,7 @@ import com.myprojectspringboot.pointofsale.dto.response.ItemGetResponse;
 import com.myprojectspringboot.pointofsale.entity.Customer;
 import com.myprojectspringboot.pointofsale.entity.Item;
 import com.myprojectspringboot.pointofsale.entity.enums.MeasuringUnitType;
+import com.myprojectspringboot.pointofsale.exception.NotFoundException;
 import com.myprojectspringboot.pointofsale.repo.ItemRepo;
 import com.myprojectspringboot.pointofsale.service.itemService;
 import org.modelmapper.ModelMapper;
@@ -60,6 +61,19 @@ public class itemServiceImpl implements itemService {
         }
         else{
             throw new RuntimeException("Item Not Active");
+        }
+    }
+
+    @Override
+    public List<ItemGetResponse> getItemsbyActiveState(boolean activeState) {
+        List <Item> items=itemRepo.findAllByActiveStateEquals(activeState);
+        if(items.size()>0){
+            //special thing in modelwrapper list
+            List <ItemGetResponse> itemGetResponses=modelMapper.map(items,new TypeToken<List<ItemGetResponse>>(){}.getType());
+            return itemGetResponses;
+        }
+        else{
+            throw new NotFoundException("Item Not Active");
         }
     }
 }

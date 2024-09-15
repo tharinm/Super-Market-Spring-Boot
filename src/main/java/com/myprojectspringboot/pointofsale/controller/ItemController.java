@@ -42,4 +42,13 @@ public class ItemController {
             List<ItemGetResponse> items=itemService.getItemByNameAndStatus(name);
           return items;
     }
+
+    @GetMapping(path="/get-all-item-by-status",params="activeState")
+    public ResponseEntity<StandardResponse> getItemByActiveStatus(@RequestParam(value="activeState") boolean activeState){
+        List<ItemGetResponse> activeItems=itemService.getItemsbyActiveState(activeState);
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(200,"Success",activeItems),
+                HttpStatus.OK
+        );
+    }
 }
