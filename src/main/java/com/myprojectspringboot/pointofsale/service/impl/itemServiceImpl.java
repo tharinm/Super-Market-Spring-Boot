@@ -6,11 +6,14 @@ import com.myprojectspringboot.pointofsale.entity.Customer;
 import com.myprojectspringboot.pointofsale.entity.Item;
 import com.myprojectspringboot.pointofsale.entity.enums.MeasuringUnitType;
 import com.myprojectspringboot.pointofsale.exception.NotFoundException;
+import com.myprojectspringboot.pointofsale.paginated.PaginatedResponseItemDTO;
 import com.myprojectspringboot.pointofsale.repo.ItemRepo;
 import com.myprojectspringboot.pointofsale.service.itemService;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.yaml.snakeyaml.constructor.DuplicateKeyException;
 
@@ -76,6 +79,26 @@ public class itemServiceImpl implements itemService {
             throw new NotFoundException("Item Not Active");
         }
     }
+
+    @Override
+    public PaginatedResponseItemDTO getItemsbyActiveStatePaginate(boolean activeState, int page, int size) {
+        Page<Item> items = itemRepo.findAllByActiveStateEquals(activeState, PageRequest.of(page, size));
+
+        if(items.hasContent()) { // Check if there is content
+            // Mapping list of Item to List<ItemGetResponse>
+            List<ItemGetResponse> itemList = modelMapper.map(items.getContent(), new TypeToken<List<ItemGetResponse>>(){}.getType());
+
+            // Create PaginatedResponseItemDTO object
+            PaginatedResponseItemDTO paginatedResponseItemDTO = new PaginatedResponseItemDTO();
+            paginatedResponseItemDTO.setActiveItems(itemList); // Set active items
+            paginatedResponseItemDTO.setDataCount(items.getTotalElements()); // Set total data count
+
+            return paginatedResponseItemDTO;
+        } else {
+            throw new NotFoundException("No data found");
+        }
+    }
+
 }
 
 

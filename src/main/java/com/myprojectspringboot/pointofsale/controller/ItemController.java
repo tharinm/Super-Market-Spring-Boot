@@ -5,6 +5,7 @@ import com.myprojectspringboot.pointofsale.dto.CustomerDTO;
 import com.myprojectspringboot.pointofsale.dto.request.ItemSaveRequestDTO;
 import com.myprojectspringboot.pointofsale.dto.response.ItemGetResponse;
 import com.myprojectspringboot.pointofsale.entity.Item;
+import com.myprojectspringboot.pointofsale.paginated.PaginatedResponseItemDTO;
 import com.myprojectspringboot.pointofsale.service.itemService;
 import com.myprojectspringboot.pointofsale.utills.StandardResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,17 +38,17 @@ public class ItemController {
         return  response;
     }
 
-    @GetMapping(path="/get-item-by-name",params="name")
+    @GetMapping(path="/get-item-by-name",params= {"name"})
     public List<ItemGetResponse> getItemByName(@RequestParam(value="name") String name){
             List<ItemGetResponse> items=itemService.getItemByNameAndStatus(name);
           return items;
     }
 
-    @GetMapping(path="/get-all-item-by-status",params="activeState")
-    public ResponseEntity<StandardResponse> getItemByActiveStatus(@RequestParam(value="activeState") boolean activeState){
-        List<ItemGetResponse> activeItems=itemService.getItemsbyActiveState(activeState);
+    @GetMapping(path="/get-all-item-by-status",params= {"activeState","page","size"})
+    public ResponseEntity<StandardResponse> getItemByActiveStatus(@RequestParam(value="activeState") boolean activeState,@RequestParam(value="page") int page,@RequestParam(value="size") int size){
+        PaginatedResponseItemDTO paginatedResponseItemDTO=itemService.getItemsbyActiveStatePaginate(activeState,page,size);
         return new ResponseEntity<StandardResponse>(
-                new StandardResponse(200,"Success",activeItems),
+                new StandardResponse(200,"Success",paginatedResponseItemDTO),
                 HttpStatus.OK
         );
     }
