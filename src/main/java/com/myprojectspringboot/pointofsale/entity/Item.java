@@ -5,6 +5,8 @@ import com.myprojectspringboot.pointofsale.entity.enums.MeasuringUnitType;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "item")
 @NoArgsConstructor
@@ -40,6 +42,8 @@ public class Item {
     @Column(name="active_status",columnDefinition = "TINYINT default 1")
     private boolean activeState;
 
+    @OneToMany(mappedBy = "item")
+    private Set<OrderDetails> orderDetails;
 
     public Item(String itemName, MeasuringUnitType measuringType, double qty, double supplierPrice, double sellingPrice) {
     }
