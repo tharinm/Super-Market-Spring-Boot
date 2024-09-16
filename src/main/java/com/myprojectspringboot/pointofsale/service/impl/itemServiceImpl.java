@@ -83,6 +83,7 @@ public class itemServiceImpl implements itemService {
     @Override
     public PaginatedResponseItemDTO getItemsbyActiveStatePaginate(boolean activeState, int page, int size) {
         Page<Item> items = itemRepo.findAllByActiveStateEquals(activeState, PageRequest.of(page, size));
+        int count = itemRepo.countAllByActiveStateEquals(activeState);
 
         if(items.hasContent()) { // Check if there is content
             // Mapping list of Item to List<ItemGetResponse>
