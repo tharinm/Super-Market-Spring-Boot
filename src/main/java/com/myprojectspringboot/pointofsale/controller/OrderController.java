@@ -16,7 +16,10 @@ public class OrderController {
     @PostMapping("/save")
     public ResponseEntity<StandardResponse> saveItem(@RequestBody RequestOrderSaveDTO requestOrderSaveDTO) {
         System.out.println(requestOrderSaveDTO);
-          return null;
+        return new ResponseEntity<StandardResponse>(
+                new StandardResponse(201,"",2),
+                HttpStatus.CREATED
+        );
 
     }
 }
