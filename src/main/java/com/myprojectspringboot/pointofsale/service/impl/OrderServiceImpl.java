@@ -41,11 +41,12 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private ItemRepo itemRepo;
 
-
+    //handle the transactions
     @Override
     @Transactional
     public String addOrder(RequestOrderSaveDTO requestOrderSaveDTO) {
 
+        //fetch customer here
         Customer customer = customerRepo.getReferenceById(requestOrderSaveDTO.getCustomer());
         System.out.println("___" +customer);
 
