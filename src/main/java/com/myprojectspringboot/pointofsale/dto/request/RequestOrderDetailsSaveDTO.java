@@ -15,9 +15,11 @@ public class RequestOrderDetailsSaveDTO {
 
 
 
-    private int orders;
-    private int item;
+
+    private String itemName;
     private double quantity;
     private double unitPrice;
     private double totalPrice;
+    private int items;
+
 }

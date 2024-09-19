@@ -25,6 +25,11 @@ public class OrderDetails {
     @JoinColumn(name = "item_id", nullable = false)
     private Item item;
 
+
+    @Column(name="item_name",nullable = false)
+    private String itemName;
+
+
     @Column(name = "quantity", nullable = false)
     private double quantity;
 
@@ -33,4 +38,6 @@ public class OrderDetails {
 
     @Column(name = "total_price", nullable = false)
     private double totalPrice;
+
+
 }

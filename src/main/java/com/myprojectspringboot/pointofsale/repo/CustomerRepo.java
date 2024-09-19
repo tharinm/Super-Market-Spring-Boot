@@ -11,4 +11,5 @@ import java.util.List;
 @EnableJpaRepositories
 public interface CustomerRepo extends JpaRepository <Customer,Integer > {
     List<Customer> findAllByActiveEquals(boolean activeState);
+
 }

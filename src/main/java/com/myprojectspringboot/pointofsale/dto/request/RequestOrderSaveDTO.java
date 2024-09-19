@@ -16,8 +16,10 @@ import java.util.Set;
 @Data
 public class RequestOrderSaveDTO {
 
-    private int customer;
+
     private Date date;
     private Double total;
+    private int customer;
     private List<RequestOrderDetailsSaveDTO> orderDetails;
+
 }
